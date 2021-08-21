@@ -14,6 +14,8 @@ import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import InfoIcon from "@material-ui/icons/Info";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import Home from "./Home";
+import Blast from "./Blast";
+import { useState } from "react";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +45,7 @@ TabPanel.propTypes = {
 
 export default function FullWidthTabs(props) {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -157,7 +159,7 @@ export default function FullWidthTabs(props) {
           Item 3
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          Item 4
+          <Blast />
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
           Item 5

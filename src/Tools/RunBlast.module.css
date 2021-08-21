@@ -1,0 +1,14 @@
+.textinput {
+  float: left;
+  height: auto;
+  width: 100%;
+  min-height: 300px;
+  outline: none;
+  resize: none;
+  border: 1px solid grey;
+}
+
+.button {
+  margin-top: 1%;
+  float: right;
+}
