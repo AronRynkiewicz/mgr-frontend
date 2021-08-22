@@ -1,21 +1,33 @@
 import style from "./RunBlast.module.css";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 
 const RunBlast = (props) => {
+  const data = {
+    seqs: [
+      {
+        seq_name: ">Query1",
+        seq: "ATGGCAAATATATTTAACTCGATAAGAATGAAACGTCCTCGTCGGAATGCTTTCAACTTATCATATGAATCAAAGTTAACGTTG",
+      },
+    ],
+  };
+
   const changeCard = (index) => {
     props.handleChange(null, index);
     props.handleChangeIndex(index);
   };
 
   const runBlast = () => {
-    props.changeDisable("");
+    props.handleResults(undefined);
+    props.changeDisable(false);
     changeCard(1);
+    axios.post("api/blast/", data).then((resp) => {
+      props.handleResults(resp.request.response);
+    });
   };
   return (
     <div>
-      <div>
-        <p>Some long text explaing what to do</p>
-      </div>
+      <div>Some long text explaing what to do</div>
       <div>
         <textarea className={style.textinput}></textarea>
         <div className={style.button}>

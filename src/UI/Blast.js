@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import style from "./Blast.module.css";
 import RunBlast from "../Tools/RunBlast";
+import BlastResults from "../Tools/BlastResults";
 import { useState } from "react";
 
 function TabPanel(props) {
@@ -40,7 +41,12 @@ TabPanel.propTypes = {
 const Blast = (props) => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
-  const [disabled, setDisabled] = useState("disabled");
+  const [disabled, setDisabled] = useState(true);
+  const [results, setResults] = useState();
+
+  const handleResults = (data) => {
+    setResults(data);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,10 +85,11 @@ const Blast = (props) => {
             changeDisable={handleDisableChange}
             handleChange={handleChange}
             handleChangeIndex={handleChangeIndex}
+            handleResults={handleResults}
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          2
+          <BlastResults results={results} />
         </TabPanel>
       </SwipeableViews>
     </div>
