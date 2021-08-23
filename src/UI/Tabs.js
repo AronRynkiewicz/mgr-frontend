@@ -16,6 +16,8 @@ import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import Home from "./Home";
 import Blast from "./Blast";
 import { useState } from "react";
+import Search from "../Tools/Search";
+import setHints from "../Tools/set-hints";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,6 +46,7 @@ TabPanel.propTypes = {
 };
 
 export default function FullWidthTabs(props) {
+  setHints();
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
@@ -153,7 +156,7 @@ export default function FullWidthTabs(props) {
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item 2
+          <Search />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           Item 3
