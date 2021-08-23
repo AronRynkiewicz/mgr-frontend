@@ -104,12 +104,12 @@ const useStyles = makeStyles({
   },
 });
 
-const renderGroup = (params) => [
-  <ListSubheader key={params.key} component="div">
-    {params.group}
-  </ListSubheader>,
-  params.children,
-];
+// const renderGroup = (params) => [
+//   <ListSubheader key={params.key} component="div">
+//     {params.group}
+//   </ListSubheader>,
+//   params.children,
+// ];
 
 const Search = (props) => {
   const [requestResult, setRequestResult] = useState();
