@@ -31,7 +31,10 @@ function createData(data) {
     const parsedData = JSON.parse(data);
     for (const [key, value] of Object.entries(parsedData)) {
       for (const element of parsedData[key]) {
-        tmpArray.push({ query: key, ...element });
+        tmpArray.push({
+          query: key,
+          ...element,
+        });
       }
     }
     return tmpArray;
