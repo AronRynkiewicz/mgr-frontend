@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BlastResults = (props) => {
+const DisplayBlastResults = (props) => {
   let loadingBar = true;
   if (props.results) {
     loadingBar = false;
@@ -144,4 +144,4 @@ const BlastResults = (props) => {
 //   );
 // };
 
-export default BlastResults;
+export default DisplayBlastResults;

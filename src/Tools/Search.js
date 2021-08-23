@@ -8,6 +8,8 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { VariableSizeList } from "react-window";
 // import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
+import DisplaySearchResults from "../UI/DisplaySearchResults";
 
 const LISTBOX_PADDING = 8; // px
 
@@ -110,14 +112,21 @@ const renderGroup = (params) => [
 ];
 
 const Search = (props) => {
+  const [requestResult, setRequestResult] = useState();
   const [selectedValue, setSelectedOptions] = useState();
+  const [displayLoaingBar, setDisplayLoaingBar] = useState(false);
   const hints = JSON.parse(sessionStorage.getItem("hints"));
   const classes = useStyles();
 
   const handleChange = (event, value) => setSelectedOptions(value);
 
   const sendRequest = () => {
-    console.log(selectedValue);
+    setRequestResult();
+    setDisplayLoaingBar(true);
+
+    axios.post("api/interaction/", { query: selectedValue }).then((resp) => {
+      setRequestResult(JSON.parse(resp.request.response));
+    });
   };
 
   return (
@@ -149,6 +158,7 @@ const Search = (props) => {
       >
         Search
       </Button>
+      <DisplaySearchResults data={requestResult} display={displayLoaingBar} />
     </div>
   );
 };

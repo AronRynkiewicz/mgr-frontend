@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import style from "./Blast.module.css";
 import RunBlast from "../Tools/RunBlast";
-import BlastResults from "../Tools/BlastResults";
+import DisplayBlastResults from "./BlastResults";
 import { useState } from "react";
 
 function TabPanel(props) {
@@ -89,7 +89,7 @@ const Blast = (props) => {
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <BlastResults results={results} />
+          <DisplayBlastResults results={results} />
         </TabPanel>
       </SwipeableViews>
     </div>
