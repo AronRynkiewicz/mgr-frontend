@@ -115,6 +115,7 @@ const Search = (props) => {
   const [requestResult, setRequestResult] = useState();
   const [selectedValue, setSelectedOptions] = useState();
   const [displayLoaingBar, setDisplayLoaingBar] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   const hints = JSON.parse(sessionStorage.getItem("hints"));
   const classes = useStyles();
 
@@ -124,18 +125,35 @@ const Search = (props) => {
     setRequestResult();
     setDisplayLoaingBar(true);
 
-    axios.post("api/interaction/", { query: selectedValue }).then((resp) => {
-      setRequestResult(JSON.parse(resp.request.response));
-    });
+    const query = selectedValue ? selectedValue : inputValue;
+    setSelectedOptions();
+    setInputValue("");
+
+    axios
+      .post("api/interaction/", {
+        query: query,
+      })
+      .then((resp) => {
+        setRequestResult(JSON.parse(resp.request.response));
+      });
+  };
+
+  const handleInputChange = (event, value) => {
+    setInputValue(value);
   };
 
   return (
     <div>
       <Autocomplete
+        freeSolo
         id="virtualize-demo"
         disableListWrap
+        inputValue={inputValue}
         classes={classes}
         onChange={handleChange}
+        onInputChange={(event, value) => {
+          handleInputChange(event, value);
+        }}
         ListboxComponent={ListboxComponent}
         // renderGroup={renderGroup}
         options={[...hints]}
@@ -148,12 +166,13 @@ const Search = (props) => {
           />
         )}
         // renderOption={(option) => <Typography noWrap>{option}</Typography>}
+        // open={inputValue ? inputValue.length > 1 : false}
       />
       <Button
         variant="contained"
         color="primary"
         onClick={sendRequest}
-        disabled={selectedValue ? false : true}
+        disabled={selectedValue || inputValue ? false : true}
         style={{ marginTop: "1%", float: "right" }}
       >
         Search
