@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
+import SearchModal from "./SearchModal";
 
 const columns = [
   { id: "virus", label: "Virus", minWidth: 170 },
@@ -17,7 +18,7 @@ const columns = [
   { id: "evidence", label: "Evidence", minWidth: 170 },
 ];
 
-function createData(data) {
+function createData(data, setOpenModal, setModalData) {
   if (data) {
     const tmpArray = [];
 
@@ -28,6 +29,16 @@ function createData(data) {
             variant="contained"
             color="primary"
             style={{ textTransform: "none" }}
+            onClick={() => {
+              setOpenModal(true);
+              setModalData({
+                organismName: interaction.virus.organism_name,
+                taxID: interaction.virus.tax_id,
+                accessionNumber: interaction.virus.accession_number,
+                sequenceLength: interaction.virus.sequence_length,
+                genomeType: interaction.virus.genome_type,
+              });
+            }}
           >
             {interaction.virus.organism_name}
           </Button>
@@ -37,6 +48,14 @@ function createData(data) {
             variant="contained"
             color="secondary"
             style={{ textTransform: "none" }}
+            onClick={() => {
+              setOpenModal(true);
+              setModalData({
+                organismName: interaction.host.organism_name,
+                taxID: interaction.host.tax_id,
+                speciesTaxID: interaction.host.species_tax_id,
+              });
+            }}
           >
             {interaction.host.organism_name}
           </Button>
@@ -72,6 +91,8 @@ const DisplaySearchResults = (props) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [openModal, setOpenModal] = React.useState(false);
+  const [modalData, setModalData] = React.useState({});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,10 +103,15 @@ const DisplaySearchResults = (props) => {
     setPage(0);
   };
 
-  const rows = createData(props.data);
+  const rows = createData(props.data, setOpenModal, setModalData);
 
   return (
     <div style={{ marginTop: "5%" }}>
+      <SearchModal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        data={modalData}
+      />
       <LinearProgress hidden={!loadingBar} />
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
