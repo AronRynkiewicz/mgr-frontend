@@ -82,6 +82,8 @@ const RunBlast = (props) => {
     const data = parseInput(seqs);
     props.handleResults(undefined);
     props.changeDisable(false);
+    sessionStorage.setItem("blastResults", JSON.stringify(""));
+
     changeCard(1);
     axios.post("api/blast/", data).then((resp) => {
       props.handleResults(resp.request.response);

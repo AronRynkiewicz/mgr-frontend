@@ -53,9 +53,16 @@ const useStyles = makeStyles({
 });
 
 const DisplayBlastResults = (props) => {
+  let data = props.results;
+
+  data = data
+    ? props.results
+    : JSON.parse(sessionStorage.getItem("blastResults"));
+
   let loadingBar = true;
-  if (props.results) {
+  if (data) {
     loadingBar = false;
+    sessionStorage.setItem("blastResults", JSON.stringify(data));
   }
 
   const classes = useStyles();
@@ -71,7 +78,7 @@ const DisplayBlastResults = (props) => {
     setPage(0);
   };
 
-  const rows = createData(props.results);
+  const rows = createData(data, props.results);
 
   return (
     <>

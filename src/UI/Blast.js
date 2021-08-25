@@ -40,8 +40,13 @@ TabPanel.propTypes = {
 
 const Blast = (props) => {
   const theme = useTheme();
-  const [value, setValue] = useState(0);
-  const [disabled, setDisabled] = useState(true);
+  const [tabID, setTabID] = useState(
+    sessionStorage.getItem("blastResults") ? 1 : 0
+  );
+
+  const [disabled, setDisabled] = useState(
+    sessionStorage.getItem("blastResults") ? false : true
+  );
   const [results, setResults] = useState();
 
   const handleResults = (data) => {
@@ -49,11 +54,11 @@ const Blast = (props) => {
   };
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setTabID(newValue);
   };
 
   const handleChangeIndex = (index) => {
-    setValue(index);
+    setTabID(index);
   };
 
   const handleDisableChange = (value) => {
@@ -64,7 +69,7 @@ const Blast = (props) => {
     <div className={style.tabs}>
       <AppBar className={style.appbar} position="static" color="default">
         <Tabs
-          value={value}
+          value={tabID}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
@@ -77,10 +82,10 @@ const Blast = (props) => {
       </AppBar>
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
+        index={tabID}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
+        <TabPanel value={tabID} index={0} dir={theme.direction}>
           <RunBlast
             changeDisable={handleDisableChange}
             handleChange={handleChange}
@@ -88,7 +93,7 @@ const Blast = (props) => {
             handleResults={handleResults}
           />
         </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel value={tabID} index={1} dir={theme.direction}>
           <DisplayBlastResults results={results} />
         </TabPanel>
       </SwipeableViews>
