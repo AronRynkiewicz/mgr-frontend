@@ -21,8 +21,14 @@ const columns = [
 ];
 
 function createData(data, setOpenModal, setModalData) {
+  data = data ? data : JSON.parse(sessionStorage.getItem("searchResults"));
   if (data) {
     const tmpArray = [];
+    try {
+      sessionStorage.setItem("searchResults", JSON.stringify(data));
+    } catch (error) {
+      sessionStorage.setItem("searchResults", JSON.stringify(""));
+    }
 
     for (const interaction of data) {
       tmpArray.push({
