@@ -93,15 +93,6 @@ const SearchModal = (props) => {
               {props.data.lineage && (
                 <p>
                   <b>Lineage: </b> <DisplayTaxonomy data={props.data.lineage} />
-                  {/* {props.data.lineage.map((tax) => {
-                    return (
-                      <p>
-                        {" "}
-                        <b>{tax.taxRank}</b>: {tax.taxName} (
-                        <i>taxid: {tax.taxid}</i>)
-                      </p>
-                    );
-                  })} */}
                 </p>
               )}
             </p>
