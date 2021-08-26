@@ -5,6 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import CloseIcon from "@material-ui/icons/Close";
 import { IconButton } from "@material-ui/core";
+import DisplayTaxonomy from "./DisplayTaxonomy";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -66,27 +67,41 @@ const SearchModal = (props) => {
             <p id="transition-modal-description">
               {props.data.accessionNumber && (
                 <p>
-                  <b>{"Accession number: "}</b> {props.data.accessionNumber}{" "}
+                  <b>Accession number: </b> {props.data.accessionNumber}
                 </p>
               )}
               {props.data.taxID && (
                 <p>
-                  <b>{"Taxonomy ID: "}</b> {props.data.taxID}{" "}
+                  <b>Taxonomy ID: </b> {props.data.taxID}
                 </p>
               )}
               {props.data.speciesTaxID && (
                 <p>
-                  <b>{"Species taxonomy ID: "}</b> {props.data.speciesTaxID}{" "}
+                  <b>Species taxonomy ID: </b> {props.data.speciesTaxID}
                 </p>
               )}
               {props.data.sequenceLength && (
                 <p>
-                  <b>{"Sequence length: "}</b> {props.data.sequenceLength}{" "}
+                  <b>Sequence length: </b> {props.data.sequenceLength}
                 </p>
               )}
               {props.data.genomeType && (
                 <p>
-                  <b>{"Genome type: "}</b> {props.data.genomeType}{" "}
+                  <b>Genome type: </b> {props.data.genomeType}
+                </p>
+              )}
+              {props.data.lineage && (
+                <p>
+                  <b>Lineage: </b> <DisplayTaxonomy data={props.data.lineage} />
+                  {/* {props.data.lineage.map((tax) => {
+                    return (
+                      <p>
+                        {" "}
+                        <b>{tax.taxRank}</b>: {tax.taxName} (
+                        <i>taxid: {tax.taxid}</i>)
+                      </p>
+                    );
+                  })} */}
                 </p>
               )}
             </p>
