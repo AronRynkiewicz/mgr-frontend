@@ -92,7 +92,10 @@ const SearchModal = (props) => {
               )}
               {props.data.lineage && (
                 <p>
-                  <b>Lineage: </b> <DisplayTaxonomy data={props.data.lineage} />
+                  <b>Lineage: </b>{" "}
+                  <p>
+                    <DisplayTaxonomy data={props.data.lineage} />
+                  </p>
                 </p>
               )}
             </p>

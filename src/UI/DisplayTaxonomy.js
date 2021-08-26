@@ -13,11 +13,17 @@ const DisplayTaxonomy = (props) => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
-        <TableHead>
+        <TableHead style={{ backgroundColor: "LightGray" }}>
           <TableRow>
-            <TableCell align="right">Taxonomy rank</TableCell>
-            <TableCell align="right">Taxonomy name</TableCell>
-            <TableCell align="right">Taxonomy id</TableCell>
+            <TableCell align="right">
+              <b>Taxonomy rank</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Taxonomy name</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Taxonomy id</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
