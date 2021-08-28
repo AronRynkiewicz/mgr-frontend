@@ -18,6 +18,7 @@ import Blast from "./Blast";
 import { useState } from "react";
 import Search from "../Tools/Search";
 import setHints from "../Tools/set-hints";
+import Browse from "./Browse";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -159,7 +160,7 @@ export default function FullWidthTabs(props) {
           <Search />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item 3
+          <Browse />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
           <Blast />
