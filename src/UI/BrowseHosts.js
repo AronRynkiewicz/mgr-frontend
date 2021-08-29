@@ -3,8 +3,8 @@ import Tree from "../Tools/Tree";
 const BrowseHosts = (props) => {
   return (
     <div style={{ height: "75vh", overflowY: "auto" }}>
-      <Tree id="1" name="Bacteria" />
-      <Tree id="2" name="Archaea" />
+      <Tree id="Bacteria" name="Bacteria" />
+      <Tree id="Archaea" name="Archaea" />
     </div>
   );
 };

@@ -11,7 +11,7 @@ const Tree = (props) => {
 
   const handleChange = (event, nodes) => {
     const data = {
-      org: event.target.innerText,
+      org: nodes[0],
     };
 
     const expandingNodes = nodes.filter((x) => !expanded.includes(x));
@@ -23,7 +23,8 @@ const Tree = (props) => {
           setChildNodes(
             JSON.parse(resp.request.response).map((node) => (
               <Tree
-                id={Math.floor(Math.random() * 500000).toString()}
+                id={node}
+                key={Math.floor(Math.random() * 50000000).toString()}
                 name={node}
               />
             ))
