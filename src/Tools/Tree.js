@@ -5,6 +5,25 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
 import axios from "axios";
 
+const sendRequest = (data, setChildNodes) => {
+  axios.post("api/browse/", data).then((resp) =>
+    setChildNodes(
+      JSON.parse(resp.request.response).map((node) => (
+        <Tree
+          id={node.tax_name}
+          key={Math.floor(Math.random() * 50000000).toString()}
+          name={
+            <p>
+              (<b>{node.tax_rank}</b>) {node.tax_name}{" "}
+              <i>(taxid: {node.tax_id})</i>
+            </p>
+          }
+        />
+      ))
+    )
+  );
+};
+
 const Tree = (props) => {
   const [childNodes, setChildNodes] = useState(null);
   const [expanded, setExpanded] = useState([]);
@@ -17,22 +36,7 @@ const Tree = (props) => {
     const expandingNodes = nodes.filter((x) => !expanded.includes(x));
     setExpanded(nodes);
     if (expandingNodes[0]) {
-      axios.post("api/browse/", data).then((resp) =>
-        setChildNodes(
-          JSON.parse(resp.request.response).map((node) => (
-            <Tree
-              id={node.tax_name}
-              key={Math.floor(Math.random() * 50000000).toString()}
-              name={
-                <>
-                  (<b>{node.tax_rank}</b>) {node.tax_name}{" "}
-                  <i>(taxid: {node.tax_id})</i>
-                </>
-              }
-            />
-          ))
-        )
-      );
+      sendRequest(data, setChildNodes);
     }
   };
 
