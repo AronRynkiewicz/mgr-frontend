@@ -11,7 +11,7 @@ const sendRequest = (data, setChildNodes) => {
       JSON.parse(resp.request.response).map((node) => (
         <Tree
           id={node.tax_name}
-          key={Math.floor(Math.random() * 50000000).toString()}
+          key={node.tax_id}
           name={
             <p>
               (<b>{node.tax_rank}</b>) {node.tax_name}{" "}
@@ -35,6 +35,7 @@ const Tree = (props) => {
 
     const expandingNodes = nodes.filter((x) => !expanded.includes(x));
     setExpanded(nodes);
+
     if (expandingNodes[0]) {
       sendRequest(data, setChildNodes);
     }
