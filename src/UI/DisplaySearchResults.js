@@ -16,7 +16,6 @@ const columns = [
   { id: "virus", label: "Virus", minWidth: 170 },
   { id: "host", label: "Host", minWidth: 170 },
   { id: "evidence", label: "Evidence", minWidth: 170 },
-  { id: "doi", label: "DOI", minWidth: 170 },
   { id: "pmid", label: "PubMed ID", minWidth: 170 },
 ];
 
@@ -96,15 +95,6 @@ function createData(data, setOpenModal, setModalData) {
         evidence: interaction.evidence
           .map((evidence) => {
             return evidence.name;
-          })
-          .join(", "),
-
-        doi: interaction.article
-          .map((article) => {
-            return article.DOI;
-          })
-          .filter((doi) => {
-            return doi !== "";
           })
           .join(", "),
 
