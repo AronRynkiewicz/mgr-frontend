@@ -1,5 +1,5 @@
 import LinearProgress from "@material-ui/core/LinearProgress";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -9,8 +9,10 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import Button from "@material-ui/core/Button";
 import SearchModal from "./SearchModal";
+import FilterModal from "./FilterModal";
+import createData from "../Tools/create-data";
+import Button from "@material-ui/core/Button";
 
 const columns = [
   { id: "virus", label: "Virus", minWidth: 170 },
@@ -18,100 +20,6 @@ const columns = [
   { id: "evidence", label: "Evidence", minWidth: 170 },
   { id: "pmid", label: "PubMed ID", minWidth: 170 },
 ];
-
-const capitalizeFirstLetter = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
-
-const extractLineage = (org) => {
-  let lineage = org.lineage;
-  let taxonomyArray = [];
-
-  while (lineage) {
-    taxonomyArray.push({
-      taxRank: capitalizeFirstLetter(lineage.taxonomy_rank.lineage_rank),
-      taxName: lineage.taxonomy_name,
-      taxid: lineage.tax_id,
-    });
-
-    lineage = lineage.parent_node;
-  }
-
-  return taxonomyArray;
-};
-
-function createData(data, setOpenModal, setModalData) {
-  data = data ? data : JSON.parse(sessionStorage.getItem("searchResults"));
-  if (data) {
-    const tmpArray = [];
-    try {
-      sessionStorage.setItem("searchResults", JSON.stringify(data));
-    } catch (error) {
-      sessionStorage.setItem("searchResults", JSON.stringify(""));
-    }
-
-    for (const interaction of data) {
-      tmpArray.push({
-        virus: (
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ textTransform: "none" }}
-            onClick={() => {
-              setOpenModal(true);
-              setModalData({
-                organismName: interaction.virus.organism_name,
-                taxID: interaction.virus.tax_id,
-                accessionNumber: interaction.virus.accession_number,
-                sequenceLength: interaction.virus.sequence_length,
-                genomeType: interaction.virus.genome_type,
-                lineage: extractLineage(interaction.virus),
-              });
-            }}
-          >
-            {interaction.virus.organism_name}
-          </Button>
-        ),
-
-        host: (
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ textTransform: "none" }}
-            onClick={() => {
-              setOpenModal(true);
-              setModalData({
-                organismName: interaction.host.organism_name,
-                taxID: interaction.host.tax_id,
-                speciesTaxID: interaction.host.species_tax_id,
-                lineage: extractLineage(interaction.host),
-              });
-            }}
-          >
-            {interaction.host.organism_name}
-          </Button>
-        ),
-
-        evidence: interaction.evidence
-          .map((evidence) => {
-            return evidence.name;
-          })
-          .join(", "),
-
-        pmid: interaction.article
-          .map((article) => {
-            return article.pmid;
-          })
-          .filter((pmid) => {
-            return +pmid !== -1 && pmid !== "";
-          })
-          .join(", "),
-      });
-    }
-    return tmpArray;
-  }
-  return [];
-}
 
 const useStyles = makeStyles({
   root: {
@@ -134,6 +42,7 @@ const DisplaySearchResults = (props) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
   const [openModal, setOpenModal] = React.useState(false);
   const [modalData, setModalData] = React.useState({});
+  const [rows, setRows] = useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -144,7 +53,9 @@ const DisplaySearchResults = (props) => {
     setPage(0);
   };
 
-  const rows = createData(props.data, setOpenModal, setModalData);
+  useEffect(() => {
+    setRows(createData(props.data, setOpenModal, setModalData, true));
+  }, [props.data]);
 
   return (
     <div style={{ marginTop: "5%" }}>
@@ -154,6 +65,7 @@ const DisplaySearchResults = (props) => {
         data={modalData}
       />
       <LinearProgress hidden={!loadingBar} />
+
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
@@ -207,6 +119,25 @@ const DisplaySearchResults = (props) => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+
+      <div style={{ display: "inline-block" }}>
+        <FilterModal
+          data={props.data}
+          setRows={setRows}
+          setOpenModalOrg={setOpenModal}
+          setModalDataOrg={setModalData}
+        />
+      </div>
+      <div style={{ display: "inline-block" }}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            setRows(createData(undefined, setOpenModal, setModalData, true));
+          }}
+        >
+          Clear filters
+        </Button>
+      </div>
     </div>
   );
 };
