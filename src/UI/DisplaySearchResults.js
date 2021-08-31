@@ -13,6 +13,7 @@ import SearchModal from "./SearchModal";
 import FilterModal from "./FilterModal";
 import createData from "../Tools/create-data";
 import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
 
 const columns = [
   { id: "virus", label: "Virus", minWidth: 170 },
@@ -43,6 +44,7 @@ const DisplaySearchResults = (props) => {
   const [openModal, setOpenModal] = React.useState(false);
   const [modalData, setModalData] = React.useState({});
   const [rows, setRows] = useState([]);
+  const [filters, setFilters] = useState({});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -54,6 +56,7 @@ const DisplaySearchResults = (props) => {
   };
 
   useEffect(() => {
+    setFilters({});
     setRows(createData(props.data, setOpenModal, setModalData, true));
   }, [props.data]);
 
@@ -64,6 +67,11 @@ const DisplaySearchResults = (props) => {
         setOpenModal={setOpenModal}
         data={modalData}
       />
+
+      {Object.keys(filters).map((key) =>
+        filters[key] ? <Chip label={`${key}: ${filters[key]}`} /> : ""
+      )}
+
       <LinearProgress hidden={!loadingBar} />
 
       <Paper className={classes.root}>
@@ -126,12 +134,14 @@ const DisplaySearchResults = (props) => {
           setRows={setRows}
           setOpenModalOrg={setOpenModal}
           setModalDataOrg={setModalData}
+          setFilters={setFilters}
         />
       </div>
       <div style={{ display: "inline-block" }}>
         <Button
           variant="contained"
           onClick={() => {
+            setFilters({});
             setRows(createData(undefined, setOpenModal, setModalData, true));
           }}
         >

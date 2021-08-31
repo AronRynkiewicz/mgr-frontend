@@ -118,7 +118,8 @@ const FilterModal = (props) => {
                       v,
                       props.setRows,
                       props.setOpenModalOrg,
-                      props.setModalDataOrg
+                      props.setModalDataOrg,
+                      props.setFilters
                     );
                   }}
                 >

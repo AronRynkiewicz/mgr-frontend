@@ -1,6 +1,13 @@
 import createData from "../Tools/create-data";
 
-const filterTable = (event, value, setRows, setOpenModal, setModalData) => {
+const filterTable = (
+  event,
+  value,
+  setRows,
+  setOpenModal,
+  setModalData,
+  setFilters
+) => {
   event.preventDefault();
   const virus_name = event.target.elements.viruses_names.value;
   const virus_taxid = event.target.elements.viruses_taxids.value;
@@ -57,6 +64,15 @@ const filterTable = (event, value, setRows, setOpenModal, setModalData) => {
           }).length !== 0
     );
   }
+
+  setFilters({
+    "Virus name": virus_name,
+    "Virus taxID": virus_taxid,
+    "Host name": host_name,
+    "Host taxID": host_taxid,
+    Evidence: evidence,
+    "PubMed ID": pubmedid,
+  });
 
   setRows(createData(data, setOpenModal, setModalData, false));
 };
