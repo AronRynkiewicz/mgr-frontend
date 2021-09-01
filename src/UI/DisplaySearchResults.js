@@ -70,6 +70,7 @@ const DisplaySearchResults = (props) => {
 
   useEffect(() => {
     setFilters({});
+    setSortedBy("");
     setRows(createData(props.data, setOpenModal, setModalData, true));
   }, [props.data]);
 
