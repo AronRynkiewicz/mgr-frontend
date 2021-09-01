@@ -13,8 +13,8 @@ import SearchModal from "./SearchModal";
 import FilterModal from "./FilterModal";
 import createData from "../Tools/create-data";
 import Button from "@material-ui/core/Button";
-import Chip from "@material-ui/core/Chip";
 import Box from "@material-ui/core/Box";
+import FilterTags from "./FilterTags";
 
 const columns = [
   { id: "virus", label: "Virus", minWidth: 170 },
@@ -69,9 +69,11 @@ const DisplaySearchResults = (props) => {
         data={modalData}
       />
 
-      {Object.keys(filters).map((key) =>
-        filters[key] ? <Chip label={`${key}: ${filters[key]}`} /> : ""
-      )}
+      <Box
+        visibility={Object.keys(filters).length !== 0 ? "visible" : "hidden"}
+      >
+        <FilterTags filters={filters} />
+      </Box>
 
       <LinearProgress hidden={!loadingBar} />
 
