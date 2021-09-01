@@ -11,6 +11,15 @@ const FilterTags = (props) => {
           ""
         )
       )}
+      <Chip
+        label="Clear filters"
+        onClick={() => {
+          props.clearFilters();
+        }}
+        onDelete={() => {
+          props.clearFilters();
+        }}
+      />
     </div>
   );
 };

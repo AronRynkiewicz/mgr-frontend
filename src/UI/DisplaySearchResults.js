@@ -12,9 +12,10 @@ import TableRow from "@material-ui/core/TableRow";
 import SearchModal from "./SearchModal";
 import FilterModal from "./FilterModal";
 import createData from "../Tools/create-data";
-import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import FilterTags from "./FilterTags";
+import SortModal from "./SortModal";
+import SortingTags from "./SortingTags";
 
 const columns = [
   { id: "virus", label: "Virus", minWidth: 170 },
@@ -46,6 +47,17 @@ const DisplaySearchResults = (props) => {
   const [modalData, setModalData] = React.useState({});
   const [rows, setRows] = useState([]);
   const [filters, setFilters] = useState({});
+  const [sortedBy, setSortedBy] = useState("");
+
+  const clearFilters = () => {
+    setFilters({});
+    setRows(createData(undefined, setOpenModal, setModalData, true));
+  };
+
+  const clearSorting = () => {
+    setSortedBy("");
+    setRows(createData(undefined, setOpenModal, setModalData, true));
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -72,7 +84,11 @@ const DisplaySearchResults = (props) => {
       <Box
         visibility={Object.keys(filters).length !== 0 ? "visible" : "hidden"}
       >
-        <FilterTags filters={filters} />
+        <FilterTags filters={filters} clearFilters={clearFilters} />
+      </Box>
+
+      <Box visibility={sortedBy.length !== 0 ? "visible" : "hidden"}>
+        <SortingTags sortedBy={sortedBy} clearSorting={clearSorting} />
       </Box>
 
       <LinearProgress hidden={!loadingBar} />
@@ -142,19 +158,16 @@ const DisplaySearchResults = (props) => {
           />
         </Box>
       </div>
+
       <div style={{ display: "inline-block" }}>
-        <Box
-          visibility={Object.keys(filters).length !== 0 ? "visible" : "hidden"}
-        >
-          <Button
-            variant="contained"
-            onClick={() => {
-              setFilters({});
-              setRows(createData(undefined, setOpenModal, setModalData, true));
-            }}
-          >
-            Clear filters
-          </Button>
+        <Box visibility={rows.length !== 0 ? "visible" : "hidden"}>
+          <SortModal
+            data={props.data}
+            setRows={setRows}
+            setOpenModalOrg={setOpenModal}
+            setModalDataOrg={setModalData}
+            setSortedBy={setSortedBy}
+          />
         </Box>
       </div>
     </div>
