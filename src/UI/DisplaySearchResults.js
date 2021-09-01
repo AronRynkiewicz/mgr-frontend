@@ -14,6 +14,7 @@ import FilterModal from "./FilterModal";
 import createData from "../Tools/create-data";
 import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
+import Box from "@material-ui/core/Box";
 
 const columns = [
   { id: "virus", label: "Virus", minWidth: 170 },
@@ -129,24 +130,30 @@ const DisplaySearchResults = (props) => {
       </Paper>
 
       <div style={{ display: "inline-block" }}>
-        <FilterModal
-          data={props.data}
-          setRows={setRows}
-          setOpenModalOrg={setOpenModal}
-          setModalDataOrg={setModalData}
-          setFilters={setFilters}
-        />
+        <Box visibility={rows.length !== 0 ? "visible" : "hidden"}>
+          <FilterModal
+            data={props.data}
+            setRows={setRows}
+            setOpenModalOrg={setOpenModal}
+            setModalDataOrg={setModalData}
+            setFilters={setFilters}
+          />
+        </Box>
       </div>
       <div style={{ display: "inline-block" }}>
-        <Button
-          variant="contained"
-          onClick={() => {
-            setFilters({});
-            setRows(createData(undefined, setOpenModal, setModalData, true));
-          }}
+        <Box
+          visibility={Object.keys(filters).length !== 0 ? "visible" : "hidden"}
         >
-          Clear filters
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setFilters({});
+              setRows(createData(undefined, setOpenModal, setModalData, true));
+            }}
+          >
+            Clear filters
+          </Button>
+        </Box>
       </div>
     </div>
   );
