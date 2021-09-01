@@ -95,6 +95,9 @@ ListboxComponent.propTypes = {
 };
 
 const useStyles = makeStyles({
+  size: {
+    height: 56,
+  },
   listbox: {
     boxSizing: "border-box",
     "& ul": {
@@ -144,36 +147,40 @@ const Search = (props) => {
 
   return (
     <div>
-      <Autocomplete
-        freeSolo
-        id="virtualize-demo"
-        disableListWrap
-        inputValue={inputValue}
-        classes={classes}
-        onChange={handleChange}
-        onInputChange={(event, value) => {
-          handleInputChange(event, value);
-        }}
-        ListboxComponent={ListboxComponent}
-        // renderGroup={renderGroup}
-        options={[...hints]}
-        // groupBy={(option) => option[0].toUpperCase()}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Name or taxID or taxonomy of virus or host"
-          />
-        )}
-        // renderOption={(option) => <Typography noWrap>{option}</Typography>}
-        // open={inputValue ? inputValue.length > 1 : false}
-      />
+      <div style={{ display: "inline-block", width: "90%" }}>
+        <Autocomplete
+          freeSolo
+          id="virtualize-demo"
+          disableListWrap
+          inputValue={inputValue}
+          classes={classes}
+          onChange={handleChange}
+          onInputChange={(event, value) => {
+            handleInputChange(event, value);
+          }}
+          ListboxComponent={ListboxComponent}
+          // renderGroup={renderGroup}
+          options={[...hints]}
+          // groupBy={(option) => option[0].toUpperCase()}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Name or taxID or taxonomy of virus or host"
+            />
+          )}
+          // renderOption={(option) => <Typography noWrap>{option}</Typography>}
+          // open={inputValue ? inputValue.length > 1 : false}
+        />
+      </div>
       <Button
         variant="contained"
         color="primary"
+        size="large"
         onClick={sendRequest}
         disabled={selectedValue || inputValue ? false : true}
-        style={{ marginTop: "1%", float: "right" }}
+        style={{ float: "right", width: "10%" }}
+        className={classes.size}
       >
         Search
       </Button>
