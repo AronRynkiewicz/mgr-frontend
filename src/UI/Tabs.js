@@ -19,6 +19,7 @@ import { useState } from "react";
 import Search from "../Tools/Search";
 import setHints from "../Tools/set-hints";
 import Browse from "./Browse";
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -143,6 +144,21 @@ export default function FullWidthTabs(props) {
               </div>
             }
           />
+
+          <Tab
+            label={
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <GetAppIcon fontSize="small" />
+                <span>Download</span>
+              </div>
+            }
+          />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -167,6 +183,9 @@ export default function FullWidthTabs(props) {
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
           Item 5
+        </TabPanel>
+        <TabPanel value={value} index={5} dir={theme.direction}>
+          Download
         </TabPanel>
       </SwipeableViews>
     </div>
