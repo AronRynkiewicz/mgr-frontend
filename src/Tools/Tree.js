@@ -4,6 +4,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
 import axios from "axios";
+import BrowseTags from "../UI/BrowseTags";
 
 const sendRequest = (data, setChildNodes) => {
   axios.post("api/browse/", data).then((resp) =>
@@ -14,8 +15,11 @@ const sendRequest = (data, setChildNodes) => {
           key={node.tax_id}
           name={
             <p>
-              (<b>{node.tax_rank}</b>) {node.tax_name}{" "}
-              <i>(taxid: {node.tax_id})</i>
+              <BrowseTags
+                tag_rank={node.tax_rank}
+                tag_text={node.tax_rank[0].toUpperCase()}
+              />{" "}
+              {node.tax_name} <i>({node.orgs_below})</i>
             </p>
           }
         />
