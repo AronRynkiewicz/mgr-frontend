@@ -75,11 +75,6 @@ const SearchModal = (props) => {
                   <b>Taxonomy ID: </b> {props.data.taxID}
                 </p>
               )}
-              {props.data.speciesTaxID && (
-                <p>
-                  <b>Species taxonomy ID: </b> {props.data.speciesTaxID}
-                </p>
-              )}
               {props.data.sequenceLength && (
                 <p>
                   <b>Sequence length: </b> {props.data.sequenceLength}
