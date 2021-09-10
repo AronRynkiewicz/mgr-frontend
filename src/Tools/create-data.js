@@ -46,9 +46,7 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
               setModalData({
                 organismName: interaction.virus.organism_name,
                 taxID: interaction.virus.tax_id,
-                accessionNumber: interaction.virus.accession_number,
                 sequenceLength: interaction.virus.sequence_length,
-                genomeType: interaction.virus.genome_type,
                 lineage: extractLineage(interaction.virus),
               });
             }}
@@ -90,6 +88,10 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
             return +pmid !== -1 && pmid !== "";
           })
           .join(", "),
+
+        virusAccession: interaction.virus.accession_number,
+
+        genomeType: interaction.virus.genome_type,
       });
     }
     return tmpArray;

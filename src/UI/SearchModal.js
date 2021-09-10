@@ -65,11 +65,6 @@ const SearchModal = (props) => {
             <h2 id="transition-modal-title">{props.data.organismName}</h2>
             <hr className={classes.line} />
             <p id="transition-modal-description">
-              {props.data.accessionNumber && (
-                <p>
-                  <b>Accession number: </b> {props.data.accessionNumber}
-                </p>
-              )}
               {props.data.taxID && (
                 <p>
                   <b>Taxonomy ID: </b> {props.data.taxID}
@@ -78,11 +73,6 @@ const SearchModal = (props) => {
               {props.data.sequenceLength && (
                 <p>
                   <b>Sequence length: </b> {props.data.sequenceLength}
-                </p>
-              )}
-              {props.data.genomeType && (
-                <p>
-                  <b>Genome type: </b> {props.data.genomeType}
                 </p>
               )}
               {props.data.lineage && (
