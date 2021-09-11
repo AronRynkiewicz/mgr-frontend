@@ -35,6 +35,17 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
     }
 
     for (const interaction of data) {
+      const pmids = interaction.article
+        .map((article) => {
+          return article.pmid;
+        })
+        .filter((pmid) => {
+          return +pmid !== -1 && pmid !== "";
+        })
+        .join(", ");
+
+      const literatureEvidence = pmids.length !== 0 ? ", Literature" : "";
+
       tmpArray.push({
         virus: (
           <Button
@@ -74,20 +85,12 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
           </Button>
         ),
 
-        evidence: interaction.evidence
-          .map((evidence) => {
-            return evidence.name;
-          })
-          .join(", "),
-
-        pmid: interaction.article
-          .map((article) => {
-            return article.pmid;
-          })
-          .filter((pmid) => {
-            return +pmid !== -1 && pmid !== "";
-          })
-          .join(", "),
+        evidence:
+          interaction.evidence
+            .map((evidence) => {
+              return evidence.name;
+            })
+            .join(", ") + literatureEvidence,
 
         virusAccession: interaction.virus.accession_number,
 
