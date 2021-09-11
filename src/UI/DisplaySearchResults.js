@@ -14,6 +14,7 @@ import FilterModal from "./FilterModal";
 import createData from "../Tools/create-data";
 import Box from "@material-ui/core/Box";
 import FilterTags from "./FilterTags";
+import EvidenceTags from "./EvidenceTags";
 
 const columns = [
   { id: "virus", label: "Virus", minWidth: 170 },
@@ -78,6 +79,14 @@ const DisplaySearchResults = (props) => {
         visibility={Object.keys(filters).length !== 0 ? "visible" : "hidden"}
       >
         <FilterTags filters={filters} clearFilters={clearFilters} />
+      </Box>
+
+      <Box visibility={rows.length !== 0 ? "visible" : "hidden"}>
+        <EvidenceTags tag_name="RefSeq" tag_text="RS: RefSeq" />
+        <EvidenceTags tag_name="Virus-Host DB" tag_text="VH: Virus-Host DB" />
+        <EvidenceTags tag_name="UniProt" tag_text="UP: UniProt" />
+        <EvidenceTags tag_name="NCBIVirus" tag_text="NV: NCBIVirus" />
+        <EvidenceTags tag_name="Literature" tag_text="L: Literature" />
       </Box>
 
       <LinearProgress hidden={!loadingBar} />

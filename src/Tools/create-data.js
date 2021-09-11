@@ -1,4 +1,5 @@
 import Button from "@material-ui/core/Button";
+import EvidenceTags from "../UI/EvidenceTags";
 
 const capitalizeFirstLetter = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -44,7 +45,13 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
         })
         .join(", ");
 
-      const literatureEvidence = pmids.length !== 0 ? ", Literature" : "";
+      const evidences = interaction.evidence.map((evidence) => {
+        return evidence.name;
+      });
+
+      if (pmids.length !== 0) {
+        evidences.push("Literature");
+      }
 
       tmpArray.push({
         virus: (
@@ -83,12 +90,9 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
           </Button>
         ),
 
-        evidence:
-          interaction.evidence
-            .map((evidence) => {
-              return evidence.name;
-            })
-            .join(", ") + literatureEvidence,
+        evidence: evidences.map((evidence) => (
+          <EvidenceTags tag_name={evidence} />
+        )),
 
         virusAccession: interaction.virus.accession_number,
 
