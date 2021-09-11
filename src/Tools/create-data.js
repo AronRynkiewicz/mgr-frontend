@@ -50,7 +50,6 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
         virus: (
           <Button
             variant="contained"
-            color="primary"
             style={{ textTransform: "none" }}
             onClick={() => {
               setOpenModal(true);
@@ -69,7 +68,6 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
         host: (
           <Button
             variant="contained"
-            color="secondary"
             style={{ textTransform: "none" }}
             onClick={() => {
               setOpenModal(true);
