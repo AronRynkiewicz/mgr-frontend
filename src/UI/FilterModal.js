@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const FilterModal = (props) => {
   const classes = useStyles();
   const [openModal, setOpenModal] = useState(false);
+  const [evidencesFilters, setEvidencesFilters] = useState([]);
 
   let data = props.data
     ? props.data
@@ -68,6 +69,8 @@ const FilterModal = (props) => {
       )
       .flat(Infinity)
   );
+
+  evidences.add("Literature");
 
   return (
     <div>
@@ -119,7 +122,9 @@ const FilterModal = (props) => {
                       props.setRows,
                       props.setOpenModalOrg,
                       props.setModalDataOrg,
-                      props.setFilters
+                      props.setFilters,
+                      evidencesFilters,
+                      setEvidencesFilters
                     );
                   }}
                 >
@@ -181,26 +186,14 @@ const FilterModal = (props) => {
 
                   <div style={{ marginTop: "5%" }}>
                     <Autocomplete
+                      multiple
                       id="evidences"
+                      onChange={(event, value) => setEvidencesFilters(value)}
                       options={[...evidences]}
                       renderInput={(params) => (
                         <TextField
                           {...params}
                           label="Evidence"
-                          variant="outlined"
-                        />
-                      )}
-                    />
-                  </div>
-
-                  <div style={{ marginTop: "5%" }}>
-                    <Autocomplete
-                      id="pubmedid"
-                      options={["Present"]}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="PubMed ID"
                           variant="outlined"
                         />
                       )}

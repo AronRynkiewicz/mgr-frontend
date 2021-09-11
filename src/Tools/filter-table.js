@@ -6,15 +6,15 @@ const filterTable = (
   setRows,
   setOpenModal,
   setModalData,
-  setFilters
+  setFilters,
+  evidenceFilters,
+  setEvidencesFilters
 ) => {
   event.preventDefault();
   const virus_name = event.target.elements.viruses_names.value;
   const virus_taxid = event.target.elements.viruses_taxids.value;
   const host_name = event.target.elements.hosts_names.value;
   const host_taxid = event.target.elements.hosts_taxids.value;
-  const evidence = event.target.elements.evidences.value;
-  const pubmedid = event.target.elements.pubmedid.value;
 
   let data = JSON.parse(sessionStorage.getItem("searchResults"));
 
@@ -42,27 +42,49 @@ const filterTable = (
     );
   }
 
-  if (evidence) {
-    data = data.filter((interaction) =>
-      interaction.evidence
-        .map((evidence) => {
-          return String(evidence.name);
-        })
-        .includes(evidence)
-    );
-  }
+  if (evidenceFilters) {
+    const newData = [];
 
-  if (pubmedid) {
-    data = data.filter(
-      (interaction) =>
-        interaction.article
+    for (const interaction of data) {
+      let pushArray = [];
+
+      if (evidenceFilters.includes("Literature")) {
+        const pmids = interaction.article
           .map((article) => {
             return article.pmid;
           })
           .filter((pmid) => {
             return +pmid !== -1 && pmid !== "";
-          }).length !== 0
-    );
+          });
+        if (pmids.length !== 0) {
+          pushArray.push(true);
+        } else {
+          pushArray.push(false);
+        }
+      }
+
+      const databases = interaction.evidence.map((evidence) => {
+        return String(evidence.name);
+      });
+
+      for (const filter of evidenceFilters) {
+        if (filter === "Literature") {
+          continue;
+        }
+        if (databases.includes(filter)) {
+          pushArray.push(true);
+        } else {
+          pushArray.push(false);
+          break;
+        }
+      }
+
+      if (!pushArray.includes(false)) {
+        newData.push(interaction);
+      }
+    }
+
+    data = newData;
   }
 
   setFilters({
@@ -70,10 +92,10 @@ const filterTable = (
     "Virus taxID": virus_taxid,
     "Host name": host_name,
     "Host taxID": host_taxid,
-    Evidence: evidence,
-    "PubMed ID": pubmedid,
+    Evidence: evidenceFilters.join(", "),
   });
 
+  setEvidencesFilters([]);
   setRows(createData(data, setOpenModal, setModalData, false));
 };
 
