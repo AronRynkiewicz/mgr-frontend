@@ -63,7 +63,6 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
               setModalData({
                 organismName: interaction.virus.organism_name,
                 taxID: interaction.virus.tax_id,
-                sequenceLength: interaction.virus.sequence_length,
                 lineage: extractLineage(interaction.virus),
               });
             }}
@@ -97,6 +96,11 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
         virusAccession: interaction.virus.accession_number,
 
         genomeType: interaction.virus.genome_type,
+
+        sequenceLength:
+          interaction.virus.sequence_length !== -1
+            ? interaction.virus.sequence_length
+            : 0,
       });
     }
     return tmpArray;

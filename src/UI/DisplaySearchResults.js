@@ -22,6 +22,7 @@ const columns = [
   { id: "host", label: "Host", minWidth: 170 },
   { id: "evidence", label: "Evidence", minWidth: 170 },
   { id: "genomeType", label: "Virus genome type", minWidth: 170 },
+  { id: "sequenceLength", label: "Sequence length", minWidth: 170 },
 ];
 
 const useStyles = makeStyles({
