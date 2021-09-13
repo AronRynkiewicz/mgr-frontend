@@ -23,6 +23,9 @@ const columns = [
   { id: "evidence", label: "Evidence", minWidth: 170 },
   { id: "genomeType", label: "Virus genome type", minWidth: 170 },
   { id: "sequenceLength", label: "Sequence length", minWidth: 170 },
+  { id: "genomeType", label: "Genome type", minWidth: 170 },
+  { id: "genomeDB", label: "Genome Database", minWidth: 170 },
+  { id: "assemblyLevel", label: "Genome assembly level", minWidth: 170 },
 ];
 
 const useStyles = makeStyles({

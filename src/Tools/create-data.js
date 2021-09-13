@@ -95,7 +95,11 @@ const createData = (data, setOpenModal, setModalData, saveToSession) => {
 
         virusAccession: interaction.virus.accession_number,
 
-        genomeType: interaction.virus.genome_type,
+        genomeType: interaction.virus.genome_type.genome_type,
+
+        genomeDB: interaction.virus.genome_db.genome_db,
+
+        assemblyLevel: interaction.virus.assembly_level.assembly_level,
 
         sequenceLength:
           interaction.virus.sequence_length !== -1
