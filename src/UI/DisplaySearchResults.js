@@ -78,13 +78,11 @@ const DisplaySearchResults = (props) => {
         data={modalData}
       />
 
-      <Box
-        visibility={Object.keys(filters).length !== 0 ? "visible" : "hidden"}
-      >
+      <Box display={Object.keys(filters).length !== 0 ? "block" : "none"}>
         <FilterTags filters={filters} clearFilters={clearFilters} />
       </Box>
 
-      <Box visibility={rows.length !== 0 ? "visible" : "hidden"}>
+      <Box display={rows.length !== 0 ? "block" : "none"}>
         <EvidenceTags tag_name="RefSeq" tag_text="RS: RefSeq" />
         <EvidenceTags tag_name="Virus-Host DB" tag_text="VH: Virus-Host DB" />
         <EvidenceTags tag_name="UniProt" tag_text="UP: UniProt" />
