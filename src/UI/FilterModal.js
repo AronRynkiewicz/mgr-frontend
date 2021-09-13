@@ -12,9 +12,9 @@ import filterTable from "../Tools/filter-table";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    margin: "auto",
+    margin: "0 auto",
     width: "50%",
-    height: "50%",
+    position: "absolute",
     alignItems: "center",
     justifyContent: "center",
     wordWrap: "break-word",
