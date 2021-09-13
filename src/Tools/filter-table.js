@@ -15,6 +15,9 @@ const filterTable = (
   const virus_taxid = event.target.elements.viruses_taxids.value;
   const host_name = event.target.elements.hosts_names.value;
   const host_taxid = event.target.elements.hosts_taxids.value;
+  const genome_types = event.target.elements.genome_types.value;
+  const genome_DBs = event.target.elements.genome_DBs.value;
+  const assembly_levels = event.target.elements.assembly_levels.value;
 
   let data = JSON.parse(sessionStorage.getItem("searchResults"));
 
@@ -39,6 +42,26 @@ const filterTable = (
   if (+host_taxid) {
     data = data.filter(
       (interaction) => interaction.host.tax_id === +host_taxid
+    );
+  }
+
+  if (genome_types) {
+    data = data.filter(
+      (interaction) =>
+        interaction.virus.genome_type.genome_type === genome_types
+    );
+  }
+
+  if (genome_DBs) {
+    data = data.filter(
+      (interaction) => interaction.virus.genome_db.genome_db === genome_DBs
+    );
+  }
+
+  if (assembly_levels) {
+    data = data.filter(
+      (interaction) =>
+        interaction.virus.assembly_level.assembly_level === assembly_levels
     );
   }
 
@@ -93,6 +116,9 @@ const filterTable = (
     "Host name": host_name,
     "Host taxID": host_taxid,
     Evidence: evidenceFilters.join(", "),
+    "Genome type": genome_types,
+    "Genome database": genome_DBs,
+    "Assembly level": assembly_levels,
   });
 
   setEvidencesFilters([]);

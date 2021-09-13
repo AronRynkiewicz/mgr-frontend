@@ -72,6 +72,18 @@ const FilterModal = (props) => {
 
   evidences.add("Literature");
 
+  const genome_types = new Set(
+    data.map((interaction) => interaction.virus.genome_type.genome_type)
+  );
+
+  const genome_DBs = new Set(
+    data.map((interaction) => interaction.virus.genome_db.genome_db)
+  );
+
+  const assembly_levels = new Set(
+    data.map((interaction) => interaction.virus.assembly_level.assembly_level)
+  );
+
   return (
     <div>
       <Button
@@ -194,6 +206,48 @@ const FilterModal = (props) => {
                         <TextField
                           {...params}
                           label="Evidence"
+                          variant="outlined"
+                        />
+                      )}
+                    />
+                  </div>
+
+                  <div style={{ marginTop: "5%" }}>
+                    <Autocomplete
+                      id="genome_types"
+                      options={[...genome_types]}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Virus genome type"
+                          variant="outlined"
+                        />
+                      )}
+                    />
+                  </div>
+
+                  <div style={{ marginTop: "5%" }}>
+                    <Autocomplete
+                      id="genome_DBs"
+                      options={[...genome_DBs]}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Genome database"
+                          variant="outlined"
+                        />
+                      )}
+                    />
+                  </div>
+
+                  <div style={{ marginTop: "5%" }}>
+                    <Autocomplete
+                      id="assembly_levels"
+                      options={[...assembly_levels]}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Genome assembly level"
                           variant="outlined"
                         />
                       )}
