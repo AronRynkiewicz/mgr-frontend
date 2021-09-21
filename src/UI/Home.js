@@ -40,6 +40,13 @@ const Home = (props) => {
             >
               Info
             </button>
+            <button
+              onClick={() => {
+                changeCard(5);
+              }}
+            >
+              Download
+            </button>
           </div>
         }
       />
