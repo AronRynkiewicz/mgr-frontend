@@ -14,7 +14,7 @@ const BrowseViruses = (props) => {
         <BrowseTags tag_rank="species" tag_text="S: Species" />
       </div>
 
-      <div style={{ height: "75vh", overflowY: "auto" }}>
+      <div style={{ height: "70vh", overflowY: "auto" }}>
         <Tree
           id="Viruses"
           name={
