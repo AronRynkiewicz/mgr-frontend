@@ -51,6 +51,7 @@ export default function FullWidthTabs(props) {
   setHints();
   const theme = useTheme();
   const [value, setValue] = useState(0);
+  const [requestResult, setRequestResult] = useState();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -173,7 +174,10 @@ export default function FullWidthTabs(props) {
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <Search />
+          <Search
+            requestResult={requestResult}
+            setRequestResult={setRequestResult}
+          />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Browse />

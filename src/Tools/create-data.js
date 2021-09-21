@@ -22,18 +22,9 @@ const extractLineage = (org) => {
   return taxonomyArray;
 };
 
-const createData = (data, setOpenModal, setModalData, saveToSession) => {
-  data = data ? data : JSON.parse(sessionStorage.getItem("searchResults"));
+const createData = (data, setOpenModal, setModalData) => {
   if (data) {
     const tmpArray = [];
-
-    if (saveToSession) {
-      try {
-        sessionStorage.setItem("searchResults", JSON.stringify(data));
-      } catch (error) {
-        sessionStorage.setItem("searchResults", JSON.stringify(""));
-      }
-    }
 
     for (const interaction of data) {
       const pmids = interaction.article

@@ -53,7 +53,7 @@ const DisplaySearchResults = (props) => {
 
   const clearFilters = () => {
     setFilters({});
-    setRows(createData(undefined, setOpenModal, setModalData, false));
+    setRows(createData(props.data, setOpenModal, setModalData));
   };
 
   const handleChangePage = (event, newPage) => {
@@ -67,7 +67,7 @@ const DisplaySearchResults = (props) => {
 
   useEffect(() => {
     setFilters({});
-    setRows(createData(props.data, setOpenModal, setModalData, true));
+    setRows(createData(props.data, setOpenModal, setModalData));
   }, [props.data]);
 
   return (
@@ -149,7 +149,7 @@ const DisplaySearchResults = (props) => {
       <div style={{ display: "inline-block" }}>
         <Box visibility={rows.length !== 0 ? "visible" : "hidden"}>
           <FilterModal
-            data={props.setModalData}
+            data={props.data}
             setRows={setRows}
             setOpenModalOrg={setOpenModal}
             setModalDataOrg={setModalData}

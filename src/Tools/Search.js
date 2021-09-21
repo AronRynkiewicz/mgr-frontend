@@ -115,7 +115,7 @@ const useStyles = makeStyles({
 // ];
 
 const Search = (props) => {
-  const [requestResult, setRequestResult] = useState();
+  // const [requestResult, setRequestResult] = useState();
   const [selectedValue, setSelectedOptions] = useState();
   const [displayLoaingBar, setDisplayLoaingBar] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -125,7 +125,7 @@ const Search = (props) => {
   const handleChange = (event, value) => setSelectedOptions(value);
 
   const sendRequest = () => {
-    setRequestResult();
+    props.setRequestResult();
     setDisplayLoaingBar(true);
 
     const query = selectedValue ? selectedValue : inputValue;
@@ -137,7 +137,7 @@ const Search = (props) => {
         query: query,
       })
       .then((resp) => {
-        setRequestResult(JSON.parse(resp.request.response));
+        props.setRequestResult(JSON.parse(resp.request.response));
       });
   };
 
@@ -184,7 +184,10 @@ const Search = (props) => {
       >
         Search
       </Button>
-      <DisplaySearchResults data={requestResult} display={displayLoaingBar} />
+      <DisplaySearchResults
+        data={props.requestResult}
+        display={displayLoaingBar}
+      />
     </div>
   );
 };

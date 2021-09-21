@@ -3,6 +3,7 @@ import createData from "../Tools/create-data";
 const filterTable = (
   event,
   value,
+  data,
   setRows,
   setOpenModal,
   setModalData,
@@ -18,8 +19,6 @@ const filterTable = (
   const genome_types = event.target.elements.genome_types.value;
   const genome_DBs = event.target.elements.genome_DBs.value;
   const assembly_levels = event.target.elements.assembly_levels.value;
-
-  let data = JSON.parse(sessionStorage.getItem("searchResults"));
 
   if (virus_name) {
     data = data.filter(
@@ -122,7 +121,7 @@ const filterTable = (
   });
 
   setEvidencesFilters([]);
-  setRows(createData(data, setOpenModal, setModalData, false));
+  setRows(createData(data, setOpenModal, setModalData));
 };
 
 export default filterTable;

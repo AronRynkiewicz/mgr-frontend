@@ -131,6 +131,7 @@ const FilterModal = (props) => {
                     filterTable(
                       e,
                       v,
+                      data,
                       props.setRows,
                       props.setOpenModalOrg,
                       props.setModalDataOrg,
