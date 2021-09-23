@@ -50,6 +50,11 @@ const Browse = (props) => {
     setTabID(index);
   };
 
+  const handleBrowseToSearch = (query) => {
+    props.handleChangeIndex(1);
+    props.setSearchQuery(query);
+  };
+
   return (
     <div className={style.tabs}>
       <AppBar className={style.appbar} position="static" color="default">
@@ -71,10 +76,10 @@ const Browse = (props) => {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={tabID} index={0} dir={theme.direction}>
-          <BrowseViruses />
+          <BrowseViruses handleBrowseToSearch={handleBrowseToSearch} />
         </TabPanel>
         <TabPanel value={tabID} index={1} dir={theme.direction}>
-          <BrowseHosts />
+          <BrowseHosts handleBrowseToSearch={handleBrowseToSearch} />
         </TabPanel>
       </SwipeableViews>
     </div>

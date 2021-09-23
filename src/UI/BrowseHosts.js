@@ -17,6 +17,7 @@ const BrowseHosts = (props) => {
       <div style={{ height: "70vh", overflowY: "auto" }}>
         <Tree
           id="Bacteria"
+          handleBrowseToSearch={props.handleBrowseToSearch}
           name={
             <>
               <BrowseTags tag_rank="superkingdom" tag_text="SK" /> Bacteria{" "}
@@ -25,6 +26,7 @@ const BrowseHosts = (props) => {
         />
         <Tree
           id="Archaea"
+          handleBrowseToSearch={props.handleBrowseToSearch}
           name={
             <>
               <BrowseTags tag_rank="superkingdom" tag_text="SK" /> Archaea{" "}

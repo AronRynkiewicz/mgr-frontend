@@ -17,6 +17,7 @@ const BrowseViruses = (props) => {
       <div style={{ height: "70vh", overflowY: "auto" }}>
         <Tree
           id="Viruses"
+          handleBrowseToSearch={props.handleBrowseToSearch}
           name={
             <>
               <BrowseTags tag_rank="superkingdom" tag_text="SK" /> Viruses{" "}

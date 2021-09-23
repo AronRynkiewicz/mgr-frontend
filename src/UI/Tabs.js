@@ -52,6 +52,7 @@ export default function FullWidthTabs(props) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [requestResult, setRequestResult] = useState();
+  const [searchQuery, setSearchQuery] = useState();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -177,10 +178,15 @@ export default function FullWidthTabs(props) {
           <Search
             requestResult={requestResult}
             setRequestResult={setRequestResult}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
           />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <Browse />
+          <Browse
+            handleChangeIndex={handleChangeIndex}
+            setSearchQuery={setSearchQuery}
+          />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
           <Blast />

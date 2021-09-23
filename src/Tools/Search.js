@@ -1,6 +1,6 @@
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ListSubheader from "@material-ui/core/ListSubheader";
@@ -124,11 +124,10 @@ const Search = (props) => {
 
   const handleChange = (event, value) => setSelectedOptions(value);
 
-  const sendRequest = () => {
+  const sendRequest = (query) => {
     props.setRequestResult();
     setDisplayLoaingBar(true);
 
-    const query = selectedValue ? selectedValue : inputValue;
     setSelectedOptions();
     setInputValue("");
 
@@ -144,6 +143,13 @@ const Search = (props) => {
   const handleInputChange = (event, value) => {
     setInputValue(value);
   };
+
+  useEffect(() => {
+    if (props.searchQuery) {
+      sendRequest(props.searchQuery);
+      props.setSearchQuery(undefined);
+    }
+  });
 
   return (
     <div>
@@ -177,7 +183,9 @@ const Search = (props) => {
         variant="contained"
         color="primary"
         size="large"
-        onClick={sendRequest}
+        onClick={() => {
+          sendRequest(selectedValue ? selectedValue : inputValue);
+        }}
         disabled={selectedValue || inputValue ? false : true}
         style={{ float: "right", width: "10%" }}
         className={classes.size}
