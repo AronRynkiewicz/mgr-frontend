@@ -115,7 +115,6 @@ const useStyles = makeStyles({
 // ];
 
 const Search = (props) => {
-  // const [requestResult, setRequestResult] = useState();
   const [selectedValue, setSelectedOptions] = useState();
   const [displayLoaingBar, setDisplayLoaingBar] = useState(false);
   const [inputValue, setInputValue] = useState("");
