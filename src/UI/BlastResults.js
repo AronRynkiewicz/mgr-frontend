@@ -9,6 +9,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import SearchIcon from "@material-ui/icons/Search";
+import IconButton from "@material-ui/core/IconButton";
 
 const columns = [
   { id: "query", label: "Query", minWidth: 170 },
@@ -25,14 +27,30 @@ const columns = [
   { id: "bit score", label: "Bit score", minWidth: 170 },
 ];
 
-function createData(data) {
+function createData(data, props) {
   if (data) {
     const tmpArray = [];
     const parsedData = JSON.parse(data);
     for (const key in parsedData) {
       for (const element of parsedData[key]) {
+        const subject = element["subject"];
+
+        delete element["subject"];
         tmpArray.push({
           query: key,
+          subject: (
+            <div>
+              {subject}
+              <IconButton
+                color="primary"
+                onClick={() => {
+                  props.handleBrowseToSearch(subject);
+                }}
+              >
+                <SearchIcon fontSize="small" />
+              </IconButton>
+            </div>
+          ),
           ...element,
         });
       }
@@ -78,7 +96,7 @@ const DisplayBlastResults = (props) => {
     setPage(0);
   };
 
-  const rows = createData(data, props.results);
+  const rows = createData(data, props);
 
   return (
     <>

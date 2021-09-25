@@ -189,7 +189,10 @@ export default function FullWidthTabs(props) {
           />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <Blast />
+          <Blast
+            handleChangeIndex={handleChangeIndex}
+            setSearchQuery={setSearchQuery}
+          />
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
           Item 5

@@ -65,6 +65,11 @@ const Blast = (props) => {
     setDisabled(value);
   };
 
+  const handleBrowseToSearch = (query) => {
+    props.handleChangeIndex(1);
+    props.setSearchQuery(query);
+  };
+
   return (
     <div className={style.tabs}>
       <AppBar className={style.appbar} position="static" color="default">
@@ -94,7 +99,10 @@ const Blast = (props) => {
           />
         </TabPanel>
         <TabPanel value={tabID} index={1} dir={theme.direction}>
-          <DisplayBlastResults results={results} />
+          <DisplayBlastResults
+            results={results}
+            handleBrowseToSearch={handleBrowseToSearch}
+          />
         </TabPanel>
       </SwipeableViews>
     </div>
