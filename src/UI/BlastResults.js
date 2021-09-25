@@ -29,7 +29,7 @@ function createData(data) {
   if (data) {
     const tmpArray = [];
     const parsedData = JSON.parse(data);
-    for (const [key, value] of Object.entries(parsedData)) {
+    for (const key in parsedData) {
       for (const element of parsedData[key]) {
         tmpArray.push({
           query: key,
