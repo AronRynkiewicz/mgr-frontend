@@ -20,6 +20,7 @@ import Search from "../Tools/Search";
 import setHints from "../Tools/set-hints";
 import Browse from "./Browse";
 import GetAppIcon from "@material-ui/icons/GetApp";
+import { saveAs } from "file-saver";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -198,7 +199,45 @@ export default function FullWidthTabs(props) {
           Item 5
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-          Download
+          <button
+            onClick={() => {
+              fetch("api/download/", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ file: "database" }),
+              })
+                .then((response) => {
+                  return response.blob();
+                })
+                .then((data) => {
+                  saveAs(data, "interactions.json");
+                });
+            }}
+          >
+            Download database (JSON)
+          </button>
+
+          <button
+            onClick={() => {
+              fetch("api/download/", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ file: "sequences" }),
+              })
+                .then((response) => {
+                  return response.blob();
+                })
+                .then((data) => {
+                  saveAs(data, "sequences.fa");
+                });
+            }}
+          >
+            Download sequences
+          </button>
         </TabPanel>
       </SwipeableViews>
     </div>
