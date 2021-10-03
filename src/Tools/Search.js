@@ -10,6 +10,7 @@ import { VariableSizeList } from "react-window";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import DisplaySearchResults from "../UI/DisplaySearchResults";
+import Grid from "@material-ui/core/Grid";
 
 const LISTBOX_PADDING = 8; // px
 
@@ -152,45 +153,49 @@ const Search = (props) => {
 
   return (
     <div>
-      <div style={{ display: "inline-block", width: "90%" }}>
-        <Autocomplete
-          freeSolo
-          id="virtualize-demo"
-          disableListWrap
-          inputValue={inputValue}
-          classes={classes}
-          onChange={handleChange}
-          onInputChange={(event, value) => {
-            handleInputChange(event, value);
-          }}
-          ListboxComponent={ListboxComponent}
-          // renderGroup={renderGroup}
-          options={[...hints]}
-          // groupBy={(option) => option[0].toUpperCase()}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label="Name or taxID or taxonomy of virus or host"
-            />
-          )}
-          // renderOption={(option) => <Typography noWrap>{option}</Typography>}
-          // open={inputValue ? inputValue.length > 1 : false}
-        />
-      </div>
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        onClick={() => {
-          sendRequest(selectedValue ? selectedValue : inputValue);
-        }}
-        disabled={selectedValue || inputValue ? false : true}
-        style={{ float: "right", width: "10%" }}
-        className={classes.size}
-      >
-        Search
-      </Button>
+      <Grid container spacing={1} alignItems="center" justify="center">
+        <Grid item xs={10}>
+          <Autocomplete
+            freeSolo
+            id="virtualize-demo"
+            disableListWrap
+            inputValue={inputValue}
+            classes={classes}
+            onChange={handleChange}
+            onInputChange={(event, value) => {
+              handleInputChange(event, value);
+            }}
+            ListboxComponent={ListboxComponent}
+            // renderGroup={renderGroup}
+            options={[...hints]}
+            // groupBy={(option) => option[0].toUpperCase()}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label="Name or taxID or taxonomy of virus or host"
+              />
+            )}
+            // renderOption={(option) => <Typography noWrap>{option}</Typography>}
+            // open={inputValue ? inputValue.length > 1 : false}
+          />
+        </Grid>
+        <Grid item xs={1}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={() => {
+              sendRequest(selectedValue ? selectedValue : inputValue);
+            }}
+            disabled={selectedValue || inputValue ? false : true}
+            className={classes.size}
+          >
+            Search
+          </Button>
+        </Grid>
+      </Grid>
+
       <DisplaySearchResults
         data={props.requestResult}
         display={displayLoaingBar}
