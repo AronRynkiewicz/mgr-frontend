@@ -1,10 +1,7 @@
-import './App.css';
-import CentralModule from './UI/CentralWindow';
+import CentralModule from "./UI/CentralWindow";
 
 function App() {
-  return (
-    <CentralModule />
-  );
+  return <CentralModule />;
 }
 
 export default App;
