@@ -84,7 +84,18 @@ const createData = (data, setOpenModal, setModalData) => {
           <EvidenceTags tag_name={evidence} />
         )),
 
-        virusAccession: interaction.virus.accession_number,
+        virusAccession: (
+          <a
+            href={
+              "https://www.ncbi.nlm.nih.gov/nuccore/" +
+              interaction.virus.accession_number
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {interaction.virus.accession_number}
+          </a>
+        ),
 
         genomeType: interaction.virus.genome_type.genome_type,
 
