@@ -1,5 +1,6 @@
 import Button from "@material-ui/core/Button";
 import EvidenceTags from "../UI/EvidenceTags";
+import Link from "@material-ui/core/Link";
 
 const capitalizeFirstLetter = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -85,7 +86,7 @@ const createData = (data, setOpenModal, setModalData) => {
         )),
 
         virusAccession: (
-          <a
+          <Link
             href={
               "https://www.ncbi.nlm.nih.gov/nuccore/" +
               interaction.virus.accession_number
@@ -94,7 +95,7 @@ const createData = (data, setOpenModal, setModalData) => {
             rel="noopener noreferrer"
           >
             {interaction.virus.accession_number}
-          </a>
+          </Link>
         ),
 
         genomeType: interaction.virus.genome_type.genome_type,
