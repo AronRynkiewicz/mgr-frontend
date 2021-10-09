@@ -15,6 +15,7 @@ import createData from "../Tools/create-data";
 import Box from "@material-ui/core/Box";
 import FilterTags from "./FilterTags";
 import EvidenceTags from "./EvidenceTags";
+import Filter from "../Tools/Filter";
 
 const columns = [
   { id: "virusAccession", label: "Virus accession", minWidth: 170 },
@@ -77,6 +78,10 @@ const DisplaySearchResults = (props) => {
         setOpenModal={setOpenModal}
         data={modalData}
       />
+
+      <Box display={rows.length !== 0 ? "block" : "none"}>
+        <Filter data={props.data} />
+      </Box>
 
       <Box display={Object.keys(filters).length !== 0 ? "block" : "none"}>
         <FilterTags filters={filters} clearFilters={clearFilters} />
