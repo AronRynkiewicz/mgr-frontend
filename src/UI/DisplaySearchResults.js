@@ -39,11 +39,6 @@ const useStyles = makeStyles({
 });
 
 const DisplaySearchResults = (props) => {
-  let loadingBar = props.display;
-  if (props.data) {
-    loadingBar = false;
-  }
-
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
@@ -95,7 +90,7 @@ const DisplaySearchResults = (props) => {
         <EvidenceTags tag_name="Literature" tag_text="L: Literature" />
       </Box>
 
-      <LinearProgress hidden={!loadingBar} />
+      <LinearProgress hidden={!props.display} />
 
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>

@@ -137,6 +137,9 @@ const Search = (props) => {
       })
       .then((resp) => {
         props.setRequestResult(JSON.parse(resp.request.response));
+      })
+      .then(() => {
+        setDisplayLoadingBar(false);
       });
   };
 
