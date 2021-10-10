@@ -42,7 +42,7 @@ const Filter = (props) => {
   const [viralDataSet, hostDataSet] = createFilterArray(props.data);
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={1} style={{ marginTop: "1%", marginBottom: "1%" }}>
       <Grid item xs={6}>
         <AutocompleteTextBox
           options={viralDataSet}

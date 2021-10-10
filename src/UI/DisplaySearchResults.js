@@ -67,7 +67,7 @@ const DisplaySearchResults = (props) => {
   }, [props.data]);
 
   return (
-    <div style={{ marginTop: "5%" }}>
+    <div style={{ marginTop: "1%" }}>
       <SearchModal
         openModal={openModal}
         setOpenModal={setOpenModal}
@@ -78,11 +78,17 @@ const DisplaySearchResults = (props) => {
         <Filter data={props.data} />
       </Box>
 
-      <Box display={Object.keys(filters).length !== 0 ? "block" : "none"}>
+      <Box
+        display={Object.keys(filters).length !== 0 ? "block" : "none"}
+        style={{ marginTop: "1%", marginBottom: "1%" }}
+      >
         <FilterTags filters={filters} clearFilters={clearFilters} />
       </Box>
 
-      <Box display={rows.length !== 0 ? "block" : "none"}>
+      <Box
+        display={rows.length !== 0 ? "block" : "none"}
+        style={{ marginTop: "1%", marginBottom: "1%" }}
+      >
         <EvidenceTags tag_name="RefSeq" tag_text="RS: RefSeq" />
         <EvidenceTags tag_name="Virus-Host DB" tag_text="VH: Virus-Host DB" />
         <EvidenceTags tag_name="UniProt" tag_text="UP: UniProt" />
