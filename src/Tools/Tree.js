@@ -22,7 +22,7 @@ const sendRequest = (data, setChildNodes, props) => {
                 tag_rank={node.tax_rank}
                 tag_text={node.tax_rank[0].toUpperCase()}
               />{" "}
-              {node.tax_name} <i>({node.orgs_below})</i>
+              {node.tax_name} <i>({node.interactions})</i>
               <IconButton
                 color="primary"
                 onClick={() => {

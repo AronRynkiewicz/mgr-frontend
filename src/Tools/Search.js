@@ -136,7 +136,7 @@ const Search = (props) => {
         query: query,
       })
       .then((resp) => {
-        props.setRequestResult(JSON.parse(resp.request.response));
+        props.setRequestResult(JSON.parse(resp.request.response).results);
       })
       .then(() => {
         setDisplayLoadingBar(false);
